@@ -207,6 +207,57 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &478146339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 478146341}
+  - component: {fileID: 478146340}
+  m_Layer: 0
+  m_Name: CoinGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &478146340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478146339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230d0128cd8e25546bdd33b0ec56d0e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RightWallCoordinats: 8.9
+  TopWallCoordinats: 4.94
+  bottomTimeBorder: 5
+  upperTimeBorder: 10
+  maxCoinInThisBattle: 5
+  coinPrefab: {fileID: 622018891812183844, guid: ff5b231884b96814782ae0cee25adb4f, type: 3}
+  coinsList: []
+--- !u!4 &478146341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478146339}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,9 +692,6 @@ MonoBehaviour:
   moveInputHorizontal: 0
   moveInputVertical: 0
   joystick: {fileID: 1662707058}
-  input: 0
-  _speed: 0
-  angle: 0
 --- !u!50 &788115473
 Rigidbody2D:
   serializedVersion: 4
@@ -693,10 +741,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a14f3bb260e72844b390d6e2e8450e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletsParent: {fileID: 1245450032}
+  BulletsParent: {fileID: 0}
   firePoint: {fileID: 1388823648}
   bulletPrefab: {fileID: 9024621446804380587, guid: 98c4a00b117c4b141a13c943678ba0d7, type: 3}
-  bulletCounter: 0
   bulletForce: 10
   bulletsList: []
 --- !u!1 &925263119
@@ -979,37 +1026,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0cb223be99678e43829e3ba0176e0e8, type: 3}
---- !u!1 &1245450032
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1245450033}
-  m_Layer: 0
-  m_Name: Bullets
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1245450033
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245450032}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.9, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1305603882 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1297376251567668134, guid: 7e2f1f9e115fc2d41910bfd65a94966e, type: 3}
@@ -1378,6 +1394,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1626178570601224521, guid: 9e90358d3cac26c4b8e6da3b42793d2e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1626178570601224523, guid: 9e90358d3cac26c4b8e6da3b42793d2e, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1626178570601224525, guid: 9e90358d3cac26c4b8e6da3b42793d2e, type: 3}
