@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Mathematics;
-
+using UnityEngine.UI;
+using TMPro;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float speed = 10f;
     [SerializeField]
-    private int maxHealth = 10;
+    public int maxHealth = 10;
     [SerializeField]
     private float moveInputHorizontal;   
     [SerializeField]
@@ -21,10 +21,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject beakPrefab;
 
-
+    public TextMeshProUGUI coinsText;
     public int coinOfPlayer;
     public int health;
-    
+
+
+
     void Start()
     {
         coinOfPlayer = 0;
@@ -48,6 +50,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //turn off player moving
     private void Death()
     {
         beakPrefab.SetActive(false);
@@ -91,6 +94,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             coinOfPlayer++;
+            coinsText.text = "Coins: " + coinOfPlayer;
         }
         if(other.gameObject.tag == "Bullet")
         {
