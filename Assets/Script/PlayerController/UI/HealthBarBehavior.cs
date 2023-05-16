@@ -48,9 +48,14 @@ public class HealthBarBehavior : MonoBehaviour
 
     void Update()
     {
-      
-        //Debug.Log("health = " + playerController.health);
-        SetHealth();
+        if (playerController.health > 0)
+        { //Debug.Log("health = " + playerController.health);
+            SetHealth();
+        }
+        else
+        {
+            slider.gameObject.SetActive(false);
+        }
     }
     private void LateUpdate()
     {

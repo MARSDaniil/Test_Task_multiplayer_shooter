@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using Photon.Pun;
+
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPun
 {
+    //setting of Photon
+
+    PhotonView view;
+
+
+
+    //setting of player in Unity
     [SerializeField]
     private float speed = 10f;
     [SerializeField]
@@ -15,13 +22,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float moveInputVertical;
 
-    [SerializeField]
+    
     private Joystick joystick;
+    
     private Rigidbody2D _rb;
     [SerializeField]
     private GameObject beakPrefab;
 
-    public TextMeshProUGUI coinsText;
     public int coinOfPlayer;
     public int health;
 
@@ -32,22 +39,30 @@ public class PlayerController : MonoBehaviour
         coinOfPlayer = 0;
         health = maxHealth;
         _rb = GetComponent<Rigidbody2D>();
+        joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<Joystick>();
+     
+
+        view = GetComponent<PhotonView>();
     }
 
 
 
     private void FixedUpdate()
     {
-        if (health > 0)
+        InputJoystickData();    
+        if (view.IsMine)
         {
-            InputJoystickData();
-            MovePlayer();
-            RotatePlayer();
-        }
-        else
-        {
-            Death();
-        }
+            if (health > 0)
+            {
+               
+                MovePlayer();
+
+            }
+            else
+            {
+                Death();
+            }
+        }   
     }
 
     //turn off player moving
@@ -57,6 +72,9 @@ public class PlayerController : MonoBehaviour
         _rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         _rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         _rb.isKinematic = true;
+
+
+
     }
     private void InputJoystickData()
     {
@@ -70,23 +88,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //rotation of the player's head in the direction of movement
-    private void RotatePlayer()
-    {
-        if (moveInputHorizontal != 0 && moveInputVertical != 0)
-        {
-            if (moveInputHorizontal >= 0)
-            {
-
-
-                transform.rotation = Quaternion.AngleAxis(Mathf.Asin(moveInputVertical) * 180 / Mathf.PI, Vector3.forward);
-            }
-            else
-            {
-                transform.rotation = Quaternion.AngleAxis(Mathf.Asin(moveInputVertical) * 180 / Mathf.PI + 180, Vector3.back);
-            }
-        }    
-    }
+   
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -94,7 +96,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             coinOfPlayer++;
-            coinsText.text = "Coins: " + coinOfPlayer;
+
         }
         if(other.gameObject.tag == "Bullet")
         {
