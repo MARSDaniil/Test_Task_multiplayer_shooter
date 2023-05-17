@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class HealthBarBehavior : MonoBehaviour
+using Photon.Pun;
+public class HealthBarBehavior : MonoBehaviourPun
 {
+
+    PhotonView view;
+
+
     [SerializeField]
     private Slider slider;
 
@@ -30,7 +34,11 @@ public class HealthBarBehavior : MonoBehaviour
       //  Offset = new Vector3(0, hightSlideUnderPlayer, 0);
         playerController = Player.GetComponent<PlayerController>();
         maxHealth = playerController.maxHealth;
+
+        view = GetComponent<PhotonView>();
     }
+
+   
     // Update is called once per frame
     public void SetHealth()
     {
@@ -48,17 +56,24 @@ public class HealthBarBehavior : MonoBehaviour
 
     void Update()
     {
+       
+        
+    }
+    private void LateUpdate()
+    {
         if (playerController.health > 0)
         { //Debug.Log("health = " + playerController.health);
-            SetHealth();
+            if (view.IsMine)
+            {
+
+
+                SetHealth();
+            }
         }
         else
         {
             slider.gameObject.SetActive(false);
         }
-    }
-    private void LateUpdate()
-    {
         // slider.transform.position = Camera.main.WorldToScreenPoint(circle.transform.position);
         slider.transform.rotation = new Quaternion(0, 0, 0, 0);
     }

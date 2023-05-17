@@ -41,8 +41,6 @@ public class RotatePlayer : MonoBehaviourPun
         {
             if (moveInputHorizontal >= 0)
             {
-
-
                 transform.rotation = Quaternion.AngleAxis(Mathf.Asin(moveInputVertical) * 180 / Mathf.PI, Vector3.forward);
             }
             else

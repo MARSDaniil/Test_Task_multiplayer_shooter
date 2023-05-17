@@ -20,6 +20,7 @@ public class CoinsText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+ //       Debug.Log(playerController.health);
         if (playerController.health > 0)
         {
             coinsText.text = "Coins: " + playerController.coinOfPlayer;

@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-
+using TMPro;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviourPun
 {
     //setting of Photon
 
     PhotonView view;
-
+    public TextMeshProUGUI textNameOfPlayer;
 
 
     //setting of player in Unity
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviourPun
      
 
         view = GetComponent<PhotonView>();
+        textNameOfPlayer.text = view.Owner.NickName;
     }
 
 
@@ -72,7 +73,6 @@ public class PlayerController : MonoBehaviourPun
         _rb.constraints = RigidbodyConstraints2D.FreezePositionX;
         _rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         _rb.isKinematic = true;
-
 
 
     }

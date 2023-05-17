@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CoinsGenetator : MonoBehaviour
+using Photon.Pun;
+public class CoinsGenetator : MonoBehaviourPun
 {
+  //  PhotonView view;
+
+
     [SerializeField]
     private float RightWallCoordinats;
     [SerializeField]
@@ -35,14 +38,14 @@ public class CoinsGenetator : MonoBehaviour
     {
         coinsList = new List<GameObject>();
         zeroRotation = new Quaternion(transform.rotation.w, transform.rotation.x, transform.rotation.y, transform.rotation.z);
- //       WaitTimeGenetator();
         CoordinateGenerator();
+
     }
 
     private void Update()
     {
+
         setCoinToScene();
-      
     }
 
     private void setCoinToScene()
@@ -69,7 +72,7 @@ public class CoinsGenetator : MonoBehaviour
         if (!freeBullet && coinsList.Count < maxCoinInThisBattle)
         {
             CoordinateGenerator();
-            coinsList.Add(Instantiate(coinPrefab, generatedCoordinats, zeroRotation));
+            coinsList.Add(PhotonNetwork.Instantiate(coinPrefab.name, generatedCoordinats, zeroRotation));
         }
    
     }

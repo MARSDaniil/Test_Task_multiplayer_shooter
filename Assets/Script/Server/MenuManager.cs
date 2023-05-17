@@ -9,6 +9,14 @@ public class MenuManager : MonoBehaviourPunCallbacks
 
     public TMP_InputField createInput;
     public TMP_InputField joinInput;
+    public TMP_InputField inputName;
+
+    private void Start()
+    {
+        PhotonNetwork.ConnectUsingSettings();
+        inputName.text = PlayerPrefs.GetString("name");
+        PhotonNetwork.NickName = inputName.text;
+    }
 
     public void CreateRoom()
     {
@@ -26,5 +34,10 @@ public class MenuManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("Game");
+    }
+    public void SaveName()
+    {
+        PlayerPrefs.SetString("name", inputName.text);
+        PhotonNetwork.NickName = inputName.text;
     }
 }
